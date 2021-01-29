@@ -24,17 +24,19 @@ body {
 
 .container {
     width:1770px;
-    padding-left: 75px;
-    padding-right: 75px;
+    margin: 0 auto;
 }
 
 /*header*/
 
-.header-row{
-    display: flex;
+.header {
+    width: 1920px;
     height: 100px;
     box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.1);
-    padding-left: 75px;
+}
+
+.header-container{
+    display: flex;
 }
 
 .header__logo {
@@ -52,59 +54,98 @@ body {
     font-weight: 600;
     font-style: normal;
     font-size: 16px;
+    padding-bottom: 10px;
     color: #333333;
+    
+}
+
+.header__nav-link:hover {
+    border-bottom: 2px solid #FF9900;
+}
+
+.header__nav-link:active {
+    border-bottom: 2px solid #FF9900;
+    color: #FF9900;
+}
+
+.header__nav-item {
+    height: 16px;  
 }
 
 .header__nav-item:not(:last-child) {
     margin-right: 85px;
 }
 
-.banner {
-    width: 1770px;
-    height: 620px;
-    background-image: url('../img/header/banner_1.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.banner__title {
-    width: 900px;
-    font-size: 70px;
-    font-style: normal;
-    font-weight: 800;
-    color: #FFFFFF;
-    padding: 103px 0px 32px 78px;
-    margin:0px;
-}
-
-.banner__subtitle {
-    width: 890px;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    color: #FFFFFF;
-    padding:0px 0px 97px 78px;
-}
-
-.banner__link {
-    width: 280px;
-    height: 80px;
-    background-color: #FF9900;;
-    margin-left: 78px;
-    padding:25px 37px;
-}
-
-.banner__link-text {
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 700;
-    color: #FFFFFF;
-}
-
-.header__search {
+.header__search-link {
     width: 25px;
     height: 25px;
     background-image: url(../img/header/header_search.svg);
     background-repeat: no-repeat;
     margin:40px 0px 35px 71px;
+}
+
+.header__search-link:hover  {
+    background-image: url(../img/header/header_search_hover.svg);
+}
+
+.header__search-link:active {
+    background-image: url(../img/header/header_search_active.svg);
+}
+
+
+/*banner*/
+
+.bannner-container {
+    height: 620px;
+    background-image: url(../img/banner.png);
+    background-repeat: no-repeat;
+    padding-left: 78px;
+    padding-top: 103px;
+}
+
+.banner__title {
+    width: 850px;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 70px;
+    line-height: 85px;
+    color: #FFFFFF;
+    margin-top: 0px;
+    margin-bottom: 32px;
+}
+
+.banner__subtitle {
+    width: 850px;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 23px;
+    line-height: 28px;
+    color: #FFFFFF;
+    margin-top: 0px;
+    margin-bottom: 97px;
+}
+
+.banner__btn {
+    width: 280px;
+    height: 80px;
+    padding: 25px 37px;
+    background-color: #FF9900;
+}
+
+.banner__btn:hover {
+    background-color: rgba(255, 153, 0, 0.6);
+    cursor: pointer;
+}
+
+.banner__btn:active {
+    background-color:#E1670E;
+    cursor: pointer;
+}
+
+.banner__btn-link {
+    font-weight: 700;
+    font-style: normal;
+    font-size: 23px;
+    line-height: 28px;
+    color: #FFFFFF;
 }
