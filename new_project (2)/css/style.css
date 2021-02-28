@@ -30,6 +30,8 @@ body {
 
 .list {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .link {
@@ -37,9 +39,23 @@ body {
 }
 
 .title {
+  margin: 0;
   font-weight: 400;
   font-size: 48px;
   line-height: 58px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 /*header*/
@@ -63,14 +79,13 @@ body {
 .header__nav {
   margin-left: auto;
   margin-right: 71px;
-  /*margin-top: 36px;  почему нельзя задать тут?*/
 }
 
 .header__list {
   display: flex;
   flex-wrap: wrap; /*делает флексбокс отзывчивым:при сужении экрана элементы построчно переносятся*/
   margin: 36px 0 0;
-  padding:0;  /*зочем?*/
+  padding:0;
 }
 
 .header__item:not(:last-child) {
@@ -82,7 +97,7 @@ body {
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  color: #333333;  /*почему не наследовался цвет от body*/
+  color: #333333;  /*цвет не наследовался,т.к. это ссылка*/
 }
 
 .header__link:hover {
@@ -118,12 +133,22 @@ body {
 
 /*banner*/
 
-.banner-container {
-  padding: 103px 0 91px 78px;
-  margin-bottom: 100px;
-  background-image: url(../img/banner/banner_1.png);
-  background-repeat: no-repeat;
+.main__banner {
+  margin-bottom: 100px;  /*отступы задаются элементам, а не блокам, main__banner является элементом блока main*/
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
   min-height: 620px;
+
+  padding: 103px 79px 91px; /* T  LR  B*/
+
+  background-image: url("../img/banner/banner_1.png");
+  background-color: #4a728a; /*задается фоновый цвет на случай, если картинка на сайте не прогрузится, а текст все равно сможет читаться*/
+  background-position: top center; /*на всякий случай положение картинке*/
+  background-repeat: no-repeat;
+
 }
 
 .banner__title {
@@ -137,7 +162,7 @@ body {
 
 .bannner__subtitle {
   max-width: 840px;
-  margin:0 0 97px 0;
+  margin:0 0 20px 0;
   font-weight: 700;
   font-size: 23px;
   line-height: 28px;
@@ -145,10 +170,10 @@ body {
 }
 
 .banner__link {
-  display: block;
-  width: 280px;
-  height: 80px;
-  padding: 25px 37px;
+  align-self: flex-start; /*прижимаем размеры блока по его содержимому*/
+  margin-top: auto;
+  padding: 25px 41px;
+
   background-color: var(--gold);
   font-weight: 700;
   line-height: 28px;
@@ -157,7 +182,7 @@ body {
 }
 
 .banner__link:hover {
-  background-color: rgba(255, 153, 0, 0.6);
+  background-color: #ffc266;
 }
 
 .banner__link:active {
@@ -166,13 +191,13 @@ body {
 
 /*about*/
 
-.about {
+.main__about {
   margin-bottom: 100px;
 }
 
 .about__title {
   margin-top: 0px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .about__subtitle {
@@ -181,11 +206,16 @@ body {
   margin-bottom: 44px;
 }
 
-.tooltip {
-  display: inline-block; /*чтобы отобразилось в строке, иначе не задавалось*/
+.about__tooltip::before {
+  content:""; /*прописываем, чтобы работал псевдоэлемент*/
+
+  display: inline-block; /*внутренняя часть форматируется как блочный элемент, а сам элемент — как строчный*/
   width: 16px;
   height: 16px;
-  background-image: url(../img/about/tooltip.svg);
+  margin-right: 5px ;
+
+  background-image: url("../img/about/tooltip.svg");
+  background-position: top center;
   background-repeat: no-repeat;
 }
 
@@ -199,36 +229,50 @@ body {
 }
 
 .column-left {
+  display: flex;
+  flex-direction: column; /*задаем для того, чтобы прижать тень к низу, а также была возможностьь добавить сверху текст в будущем*/
+  margin-right:10px;
+
   min-height: 622px;
-  background-image: url(../img/about/about-left.png);
+  background-image: url("../img/about/about-left.png");
+  background-position: center center; /*почему центр центр, а не топ центр, как было до этого?*/
   background-repeat: no-repeat;
+  background-color: #9cb4a4;
 }
 
 .column-left__shadow {
   display: flex;
   min-height: 176px;
-  margin-top: 440px;
+  margin-top: auto; /*является потомком флексбокса column-left,поэтому задаем ему позиционирование, прижимая его к низу*/
+  padding: 44px 68px 42px 54px;
   background-color: rgba(0, 0, 0, 0.5);;
 }
 
 .column-left__text {
   max-width: 497px;
-  margin: 44px 76px 42px 54px;
+  margin-right: 76px;
   font-weight: 700;
   color: #ffffff;
 }
 
 .column-left__link {
-  display: block;
-  width: 175px;
-  height: 60px;
-  padding: 20px 38px;
-  margin: 66px 68px 58px 0;
+  align-self: center;
+  padding: 18px 36px;
   font-weight: 700;
   line-height: 19px;
   color: #ffffff;
   border: 2px solid var(--gold);
 }
+
+.column-left__link:hover {
+  background-color: #FF9900;
+}
+
+.column-left__link:active {
+  background-color: var(--dark-gold);
+  border: 2px solid var(--dark-gold);
+}
+
 
 .column-right {
   display: flex;
@@ -238,37 +282,30 @@ body {
 
 .column-right__item {
   display:flex;
-  width: 870px;
+  flex-direction: column;
   min-height: 295px;
-  padding-left: 63px;
+  padding:67px 100px 10px 300px;
   border: 1px solid #CACACA;
 }
 
-.column-right__icon {
-  min-width: 178px;
-  margin-right: 59px;
+.column-right__item:not(:last-child) {
+  margin-bottom: 10px;
 }
 
-.column-right__icon-top {
-  height: 137px;
-  margin-top: 71px;
-  background-image: url(../img/about/icon-top.svg);
+.column-right__item--background-top {
+  background-image: url("../img/about/icon-top.svg");
   background-repeat: no-repeat;
+  background-position: 62px 71px; ;
 }
 
-.column-right__icon-bottom{
-  height: 153px;
-  margin-top: 55px;
-  background-image: url(../img/about/icon-bottom.svg);
+.column-right__item--background-bottom {
+  background-image: url("../img/about/icon-bottom.svg");
   background-repeat: no-repeat;
-}
-
-.column-right__text {
-  margin-top: 67px;
+  background-position: 62px 54px;
 }
 
 .column-right__title {
-  margin: 0 100px 0 0;
+  margin: 0;
   font-size: 24px;
 }
 
@@ -276,3 +313,177 @@ body {
   margin: 5px 0 0 0;
   max-width: 430px;
 }
+
+/*works*/
+
+.main__works {
+  margin-bottom: 100px;
+}
+
+.works__title{
+  margin-bottom: 44px;
+}
+
+.works__list {
+  display: flex;
+  padding: 0;
+  margin-bottom: 49px;
+}
+
+.works__item {
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.works__item:not(:last-child) {
+  margin-right: 85px;
+
+}
+
+.works__item-link {
+  color: #333333;
+}
+
+.works__item-link:hover {
+  color: var(--gold);
+}
+
+.works__item-link:active {
+  color: var(--dark-gold);
+}
+
+
+.works__row {
+  display: flex;
+}
+
+.works__column {
+  max-width: 870px;
+}
+
+.block-left {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 10px;
+}
+
+.block-left__title {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+}
+
+.block-left__description {
+  margin: 0;
+  max-width: 758px;
+}
+
+.block-left__row {
+  display: flex;
+  margin-top: auto;
+
+}
+
+.row-link__information {
+  padding: 20px 38px;
+  font-weight: 700;
+  line-height: 19px;
+  color: #ffffff;
+  margin-right: 30px;
+
+  background-color: var(--gold);
+}
+
+.row-link__information:hover {
+  background-color: #ffc266;
+}
+
+.row-link__information:active {
+  background-color: var(--dark-gold);
+}
+
+.row-link__contract {
+  padding: 19px 38px;
+  line-height: 19px;
+  color: #333333;
+
+  border: 1px solid #333333;
+}
+
+.row-link__contract:hover {
+  color:#ffffff;
+  background-color: #666666;
+}
+
+.row-link__contract:active {
+  background-color: #000000;
+}
+
+
+.block--right {
+  width: 100%;
+  min-height: 465px;
+  margin-left: auto;
+  margin-top: 12px;
+  background-image: url("../img/main/block-right.png");
+  background-repeat: no-repeat;
+}
+
+/*FAQ*/
+
+.main__faq{
+  margin-bottom: 100px;
+}
+
+.faq__title {
+  margin-bottom: 38px;
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq__item {
+  display: flex;
+  align-items: center;
+  min-height: 110px;
+  border-top: 1px solid #CACACA;
+}
+
+.faq__item:last-child {
+  border-bottom:1px solid #CACACA;
+}
+
+.faq__item-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+
+  color:#333333;
+}
+
+.faq__icon {
+  margin-top:10px;
+  margin-left: auto;
+}
+
+.faq__item:hover {
+  cursor: pointer;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+}
+
+.faq__item:nth-of-type(n+1):hover {
+  border-top: 1px solid var(--gold);
+}
+
+.faq__item:hover .faq__item-title {
+  color:var(--gold);
+}
+
+.faq__item:hover .faq__icon-ellipse {
+  fill: #D2D2D2;
+}
+
+
