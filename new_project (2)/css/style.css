@@ -355,10 +355,11 @@ body {
 
 .works__row {
   display: flex;
+  flex-direction: row;
 }
 
 .works__column {
-  max-width: 870px;
+  min-width: 870px;
 }
 
 .block-left {
@@ -366,6 +367,7 @@ body {
   flex-direction: column;
 
   margin-right: 10px;
+  min-width: 890px;
 }
 
 .block-left__title {
@@ -374,7 +376,7 @@ body {
 }
 
 .block-left__description {
-  margin: 0;
+  margin: 0 0 10px 0;
   max-width: 758px;
 }
 
@@ -419,14 +421,16 @@ body {
   background-color: #000000;
 }
 
+.works__row::after {
+  content: "";
 
-.block--right {
   width: 100%;
   min-height: 465px;
   margin-left: auto;
   margin-top: 12px;
   background-image: url("../img/main/block-right.png");
   background-repeat: no-repeat;
+
 }
 
 /*FAQ*/
@@ -447,7 +451,7 @@ body {
 .faq__item {
   display: flex;
   align-items: center;
-  min-height: 110px;
+  min-height: 110px; /*(бордеры не прилипают, в чем проблема?)*/
   border-top: 1px solid #CACACA;
 }
 
@@ -460,6 +464,8 @@ body {
   font-weight: 700;
   line-height: 32px;
 
+  margin-right: 10px;
+
   color:#333333;
 }
 
@@ -468,15 +474,11 @@ body {
   margin-left: auto;
 }
 
-.faq__item:hover {
+.faq__item + .faq__item:hover{
   cursor: pointer;
-  border-top: 1px solid var(--gold);
-  border-bottom: 1px solid var(--gold);
 }
 
-.faq__item:nth-of-type(n+1):hover {
-  border-top: 1px solid var(--gold);
-}
+
 
 .faq__item:hover .faq__item-title {
   color:var(--gold);
@@ -487,3 +489,104 @@ body {
 }
 
 
+/*footer*/
+.footer {
+  padding-bottom: 80px;
+  background-color: #222222;
+}
+
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__block {
+  min-width: 602px;
+}
+
+.footer__block-left {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 560px;
+}
+
+.footer__logo {
+  display: block;
+  margin: 48px 0 5px 0;
+}
+
+.footer__link {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 36px;
+
+  color: #CACACA;
+}
+
+.footer__nav {
+  margin-bottom: 10px;
+}
+
+.footer__social {
+  display: flex;
+  margin-top: auto;
+}
+
+.footer__social-item {
+  margin-right: 25px;
+}
+
+.footer__form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 57px;
+}
+
+.form__title {
+  margin-bottom: 31px;
+  font-size: 48px;
+  line-height: 51px;
+
+  color: #CACACA;
+}
+
+.form__input {
+  width: 570px;
+  padding: 14px 24px;
+  color: #CACACA;
+  background-color: #414141;
+  border: none;
+}
+
+.form__input-name,
+.form__input-email {
+  height: 60px;
+  margin-bottom: 25px;
+}
+
+.form__input-message {
+  height: 150px;
+  margin-bottom: 31px;
+}
+
+.form__btn {
+  padding: 20px 52px;
+  margin-right: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--gold);
+  border: none;
+}
+
+.form__agreement-text {
+
+  color: #4e4e4e;
+}
+
+.footer__text {
+  margin: 126px 40px 0 auto ;
+  max-width: 356px ;
+
+  color:#CACACA;
+}
